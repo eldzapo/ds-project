@@ -1,4 +1,3 @@
-<!-- resources/js/components/App.vue -->
 <template>
   <div id="app">
     <header>

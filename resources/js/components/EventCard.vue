@@ -1,4 +1,3 @@
-<!-- resources/js/components/EventCard.vue -->
 <template>
   <div class="event-card">
     <h3>{{ event.title }}</h3>

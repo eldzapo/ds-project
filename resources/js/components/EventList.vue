@@ -1,4 +1,3 @@
-<!-- resources/js/components/EventList.vue -->
 <template>
   <div>
     <event-card
