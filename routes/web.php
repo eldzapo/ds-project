@@ -8,3 +8,4 @@ Route::get('/', function () {
 });
 
 Route::get('events', [EventsController::class, 'getEvents']);
+Route::post('event', [EventsController::class, 'storeEvent']);
