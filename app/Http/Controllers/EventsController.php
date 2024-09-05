@@ -9,7 +9,7 @@ class EventsController extends Controller
 {
     //
 
-    public function index(){
+    public function getEvents(){
 
         $events = Event::all();
 
@@ -18,5 +18,22 @@ class EventsController extends Controller
             'events' => $events
         ];
         return response()->json($data, 200);
+    }
+
+    public function storeEvent(Request $request)
+    {
+        $event = Event::create($request->only([
+            'title',
+            'description',
+            'location',
+            'start_time',
+            'end_time',
+            'google_event_id'
+        ]));
+
+        return response()->json([
+            'status' => 201,
+            'event' => $event
+        ], 201);
     }
 }

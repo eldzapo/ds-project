@@ -7,4 +7,4 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('events', [EventsController::class, 'index']);
+Route::get('events', [EventsController::class, 'getEvents']);

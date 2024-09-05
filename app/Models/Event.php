@@ -8,4 +8,13 @@ use Illuminate\Database\Eloquent\Model;
 class Event extends Model
 {
     use HasFactory;
+
+    protected $fillable = [
+        'title',
+        'description',
+        'location',
+        'start_time',
+        'end_time',
+        'google_event_id',
+    ];
 }
