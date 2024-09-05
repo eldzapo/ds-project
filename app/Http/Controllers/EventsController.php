@@ -21,6 +21,9 @@ class EventsController extends Controller
 
     public function storeEvent(Request $request)
     {
+        // Log request data for debugging
+        \Log::info($request->all());
+    
         $validator = Validator::make($request->all(), [
             'title' => 'required|string|max:255',
             'description' => 'nullable|string',
@@ -29,32 +32,31 @@ class EventsController extends Controller
             'end_time' => 'required|date_format:Y-m-d H:i:s|after:start_time',
             'google_event_id' => 'nullable|string|max:255|unique:events,google_event_id',
         ]);
-
+    
         if ($validator->fails()) {
             $data = [
                 "status" => 422,
-                "message" => $validator->messages()
+                "errors" => $validator->messages()
             ];
             return response()->json($data, 422);
-        } else {
-            // Create and save new event
-            $event = new Event();
-
-            $event->title = $request->input('title'); 
-            $event->description = $request->input('description');
-            $event->location = $request->input('location');
-            $event->start_time = $request->input('start_time');
-            $event->end_time = $request->input('end_time');
-            $event->google_event_id = $request->input('google_event_id');
-
-            $event->save();
-
-            $data = [
-                'status' => 200,
-                'message' => 'Data uploaded successfully'
-            ];
-
-            return response()->json($data, 200);
         }
-    }
+    
+        $event = new Event();
+        $event->title = $request->input('title');
+        $event->description = $request->input('description');
+        $event->location = $request->input('location');
+        $event->start_time = $request->input('start_time');
+        $event->end_time = $request->input('end_time');
+        $event->google_event_id = $request->input('google_event_id');
+        $event->save();
+    
+        $data = [
+            'status' => 200,
+            'message' => 'Event saved successfully',
+            'event' => $event
+        ];
+    
+        return response()->json($data, 200);
+    }    
+    
 }
