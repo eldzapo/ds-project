@@ -1,21 +1,29 @@
 <template>
   <div class="event-card">
     <h3>{{ event.title }}</h3>
-    <p>{{ event.description }}</p>
-    <p><strong>Location:</strong> {{ event.location }}</p>
-    <p><strong>Start Time:</strong> {{ event.start_time }}</p>
-    <p><strong>End Time:</strong> {{ event.end_time }}</p>
-    <p><strong>Google Event ID:</strong> {{ event.google_event_id }}</p>
+    <p><strong>Start Time:</strong> {{ formatDate(event.start_time) }}</p>
+    <p><strong>End Time:</strong> {{ formatDate(event.end_time) }}</p>
+    <div class="description-container">
+      <p class="description">{{ event.description }}</p>
+    </div>
   </div>
 </template>
 
 <script>
+import { format } from 'date-fns';
+
 export default {
   name: 'EventCard',
   props: {
     event: {
       type: Object,
       required: true,
+    },
+  },
+  methods: {
+    formatDate(dateString) {
+      const date = new Date(dateString);
+      return format(date, 'MMMM dd, yyyy'); 
     },
   },
 };
@@ -28,12 +36,42 @@ export default {
   margin-bottom: 1em;
   border-radius: 5px;
   background-color: #f9f9f9;
+  position: relative;
+  overflow: hidden;
 }
+
+.event-card:hover {
+    cursor:pointer;
+}
+
 h3 {
   margin: 0 0 0.5em;
   color: #333;
 }
+
 p {
   margin: 0.5em 0;
+}
+
+.description-container {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: #ffffff;
+  padding: 1em;
+  border-top: 1px solid #ddd;
+  transform: translateY(100%);
+  transition: transform 0.3s ease, opacity 0.3s ease;
+  opacity: 0;
+}
+
+.event-card:hover .description-container {
+  transform: translateY(0);
+  opacity: 1;
+}
+
+.description {
+  margin: 0;
 }
 </style>

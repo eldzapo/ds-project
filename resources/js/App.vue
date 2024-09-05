@@ -4,8 +4,8 @@
       <h1>Dewesoft google app</h1>
     </header>
     <main>
+     <button @click="fetchEvents">Fetch Events</button>
       <event-list :events="events"></event-list>
-      <button @click="fetchEvents">Fetch Events</button>
     </main>
   </div>
 </template>
@@ -40,3 +40,9 @@ export default {
   },
 };
 </script>
+
+<style>
+  button{
+    margin-left: 50px;
+  }
+</style>

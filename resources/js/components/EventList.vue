@@ -29,5 +29,7 @@ export default {
 </script>
 
 <style scoped>
-/* Styles for EventList if needed */
+  div {
+    margin:30px;
+  }
 </style>
