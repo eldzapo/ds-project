@@ -8,28 +8,31 @@
   </div>
 </template>
 
-<script>
+<script lang="ts">
+import { defineComponent, PropType } from 'vue';
 import EventCard from './EventCard.vue';
+import { Event } from '../../types/event';
 
-export default {
+export default defineComponent({
   name: 'EventList',
   components: {
     EventCard,
   },
-  props: {
+  props  : {
     events: {
-      type: Array,
+      type: Array as PropType<Event[]>,
       default: () => [],
+      required: true,
     },
   },
   mounted() {
     console.log('Events:', this.events);
   },
-};
+});
 </script>
 
 <style scoped>
-  div {
-    margin:30px;
-  }
+div {
+  margin: 30px;
+}
 </style>

@@ -2,7 +2,7 @@
 <html>
 <head>
     <title>Laravel Vue</title>
-    @vite(['resources/js/app.js', 'resources/sass/app.scss'])
+    @vite(['resources/js/app.ts', 'resources/sass/app.scss'])
 </head>
 <body>
     <div id="app">

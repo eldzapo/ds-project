@@ -1,32 +1,42 @@
 <template>
-  <div class="event-card">
+  <div class="event-card" @click="toggleDescription">
     <h3>{{ event.title }}</h3>
     <p><strong>Start Time:</strong> {{ formatDate(event.start_time) }}</p>
     <p><strong>End Time:</strong> {{ formatDate(event.end_time) }}</p>
-    <div class="description-container">
+    <div class="description-container" :class="{ 'show-description': showDescription }">
       <p class="description">{{ event.description }}</p>
     </div>
   </div>
 </template>
 
-<script>
+<script lang="ts">
+import { defineComponent } from 'vue';
 import { format } from 'date-fns';
+import { Event } from '../../types/event';
 
-export default {
+export default defineComponent({
   name: 'EventCard',
   props: {
     event: {
-      type: Object,
+      type: Object as () => Event,
       required: true,
     },
   },
+  data() {
+    return {
+      showDescription: false,
+    };
+  },
   methods: {
-    formatDate(dateString) {
+    formatDate(dateString: string) {
       const date = new Date(dateString);
       return format(date, 'MMMM dd, yyyy'); 
     },
+    toggleDescription() {
+      this.showDescription = !this.showDescription;
+    },
   },
-};
+});
 </script>
 
 <style scoped>
@@ -38,10 +48,12 @@ export default {
   background-color: #f9f9f9;
   position: relative;
   overflow: hidden;
+  transition: background-color 0.3s ease;
 }
 
 .event-card:hover {
-    cursor:pointer;
+  cursor: pointer;
+  background-color: #e9e9e9;
 }
 
 h3 {
@@ -66,7 +78,8 @@ p {
   opacity: 0;
 }
 
-.event-card:hover .description-container {
+.event-card:hover .description-container,
+.event-card.show-description .description-container {
   transform: translateY(0);
   opacity: 1;
 }
