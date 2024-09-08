@@ -21,8 +21,6 @@ class EventsController extends Controller
 
     public function storeEvent(Request $request)
     {
-        // Log request data for debugging
-        \Log::info($request->all());
     
         $validator = Validator::make($request->all(), [
             'title' => 'required|string|max:255',

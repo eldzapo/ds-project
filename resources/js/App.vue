@@ -16,7 +16,7 @@
 import EventList from './components/EventList.vue';
 import { ref } from 'vue';
 
-const API_URL = 'http://localhost:8000/api/do-both'; // Global URL variable
+const API_URL = 'http://localhost:8000/api/do-both';
 
 export default {
   name: 'App',

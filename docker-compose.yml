@@ -11,7 +11,7 @@ services:
     networks:
       - app-network
     depends_on:
-      - mysql
+      - mysql  
     environment:
       - APP_ENV=local
       - APP_DEBUG=true
@@ -25,9 +25,9 @@ services:
       MYSQL_USER: myuser
       MYSQL_PASSWORD: mypassword
     ports:
-      - "3307:3306"
+      - "3307:3306"  
     volumes:
-      - mysql-data:/var/lib/mysql
+      - mysql-data:/var/lib/mysql  
     networks:
       - app-network
 
@@ -35,20 +35,21 @@ services:
     image: nginx:alpine
     container_name: nginx
     ports:
-      - "80:80"
+      - "80:80"  
     volumes:
-      - ./nginx.conf:/etc/nginx/nginx.conf
-      - .:/var/www/html
+      - ./nginx.conf:/etc/nginx/nginx.conf 
+      - ./nginx.conf.d:/etc/nginx/conf.d
+      - .:/var/www/html 
     networks:
       - app-network
 
   node:
-    image: node:16
+    image: node:20
     container_name: node
     volumes:
-      - .:/app
+      - .:/app  
     working_dir: /app
-    command: sh -c "npm install && npm run dev"
+    command: sh -c "npm install && npm run dev"  
     networks:
       - app-network
 
@@ -57,4 +58,4 @@ networks:
     driver: bridge
 
 volumes:
-  mysql-data:
+  mysql-data: 
