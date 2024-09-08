@@ -33,3 +33,7 @@ The Google Calendar Sync App integrates with Google Calendar to fetch events fro
 bash
 Copy code
 docker-compose up --build
+
+## Google calendar url 
+
+URL : https://calendar.google.com/calendar/embed?src=2c4f034ddc4abc96291f0f8f883ca7a6a76c284064ef15fc922ebc280708854e%40group.calendar.google.com
