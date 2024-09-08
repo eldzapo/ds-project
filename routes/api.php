@@ -13,4 +13,4 @@ Route::get('/user', function (Request $request) {
 Route::get('events', [EventsController::class, 'getEvents']);
 Route::post('event', [EventsController::class, 'storeEvent']);
 Route::get('even', [GoogleCalendarController::class, 'fetchEvents']);
-Route::get('sync-fetch', [GoogleCalendarController::class, 'syncAndFetchEvents']);
+Route::get('sync-fetch', [GoogleCalendarController::class, 'syncEvents']);
