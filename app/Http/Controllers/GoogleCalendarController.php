@@ -6,8 +6,8 @@ use Google_Client;
 use Google_Service_Calendar;
 use Illuminate\Http\JsonResponse;
 use Google_Service_Exception;
-use App\Jobs\SyncGoogleCalendarEvents; // Ensure this line is correct
-use App\Models\Event; // Import the Event model
+use App\Jobs\SyncGoogleCalendarEvents; 
+use App\Models\Event;
 
 
 
@@ -60,7 +60,6 @@ class GoogleCalendarController extends Controller
         $newEvents = array_filter($googleEvents, fn($event) => !in_array($event->getId(), $existingEventIds));
 
         foreach ($newEvents as $event) {
-            // Ensure non-null values for the title and other fields
             Event::create([
                 'google_event_id' => $event->getId(),
                 'title' => $event->getSummary() ?? 'No title provided',
@@ -78,5 +77,21 @@ class GoogleCalendarController extends Controller
         return response()->json(['error' => $e->getMessage()], 500);
     }
 }
+
+    public function syncAndFetchEvents(): JsonResponse
+        {
+            $syncResponse = $this->syncEvents();
+
+            if ($syncResponse->status() !== 200) {
+                return $syncResponse; 
+            }
+
+            $events = Event::all();
+
+            return response()->json([
+                'message' => 'Events synchronized and fetched successfully',
+                'events' => $events
+            ]);
+        }
 
 }

@@ -24,7 +24,7 @@ export default {
 
     const fetchEvents = async () => {
       try {
-        const response = await fetch('http://localhost:8000/api/events');
+        const response = await fetch('http://localhost:8000/api/do-both');
         const data = await response.json();
         events.value = data.events;
         console.log('Fetched events:', events.value);
