@@ -30,7 +30,7 @@ export default defineComponent({
   methods: {
     formatDate(dateString: string) {
       const date = new Date(dateString);
-      return format(date, 'MMMM dd, yyyy'); 
+      return format(date, 'MMMM dd, yyyy');
     },
     toggleDescription() {
       this.showDescription = !this.showDescription;
@@ -41,28 +41,32 @@ export default defineComponent({
 
 <style scoped>
 .event-card {
-  padding: 1em;
+  padding: 1.5em;
   border: 1px solid #ddd;
-  margin-bottom: 1em;
-  border-radius: 5px;
-  background-color: #f9f9f9;
+  margin-bottom: 1.5em;
+  border-radius: 8px;
+  background-color: #ffffff;
   position: relative;
   overflow: hidden;
-  transition: background-color 0.3s ease;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transition: box-shadow 0.3s ease, background-color 0.3s ease;
 }
 
 .event-card:hover {
   cursor: pointer;
-  background-color: #e9e9e9;
+  background-color: #f0f4f8;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
 }
 
 h3 {
   margin: 0 0 0.5em;
   color: #333;
+  font-size: 1.2em;
 }
 
 p {
   margin: 0.5em 0;
+  color: #666;
 }
 
 .description-container {
@@ -76,6 +80,7 @@ p {
   transform: translateY(100%);
   transition: transform 0.3s ease, opacity 0.3s ease;
   opacity: 0;
+  box-shadow: 0 -4px 8px rgba(0, 0, 0, 0.05);
 }
 
 .event-card:hover .description-container,
@@ -86,5 +91,6 @@ p {
 
 .description {
   margin: 0;
+  color: #444;
 }
 </style>
